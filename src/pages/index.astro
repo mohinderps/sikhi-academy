@@ -3,12 +3,71 @@ import BaseHead from '../components/BaseHead.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
-import { getCollection } from 'astro:content';
-import FormattedDate from '../components/FormattedDate.astro';
+import guruNanakDevJiImage from '../images/sikh-gurus/guru-nanak-dev-ji.jpg';
+import guruAngadDevJiImage from '../images/sikh-gurus/guru-angad-dev-ji.jpg';
+import guruAmarDasJiImage from '../images/sikh-gurus/guru-amar-das-ji.jpg';
+import guruRamDasJiImage from '../images/sikh-gurus/guru-ram-das-ji.jpg';
+import guruArjanDevJiImage from '../images/sikh-gurus/guru-arjan-dev-ji.jpg';
+import guruHarGobindJiImage from '../images/sikh-gurus/guru-har-gobind-ji.jpg';
+import guruHarRaiJiImage from '../images/sikh-gurus/guru-har-rai-ji.jpg';
+import guruHarKrishanJiImage from '../images/sikh-gurus/guru-har-krishan-ji.jpg';
+import guruTeghBahadurJiImage from '../images/sikh-gurus/guru-tegh-bahadur-ji.jpg';
+import guruGobindSinghJiImage from '../images/sikh-gurus/guru-gobind-singh-ji.jpg';
+import {Image} from 'astro:assets';
 
-const posts = (await getCollection('blog')).sort(
-	(a, b) => a.data.pubDate.valueOf() - b.data.pubDate.valueOf()
-);
+
+const sikhGurus = [{
+    name: 'Guru Nanak Dev Ji',
+    image: guruNanakDevJiImage,
+    description: 'Guru Nanak Dev Ji was the founder of Sikhism and the first of the ten Sikh Gurus. His birth is celebrated worldwide as Guru Nanak Gurpurab on Kartik Pooranmashi, the full-moon day in the month of Katak, October–November.',
+    slug: 'guru-nanak-dev-ji',
+}, {
+    name: 'Guru Angad Dev Ji',
+    image: guruAngadDevJiImage,
+    description: 'Guru Angad Dev Ji was the second of the ten Sikh Gurus. He was born in a Hindu family, with the birth name as Lehna, in the village of Harike in northwest Indian subcontinent.',
+    slug: 'guru-angad-dev-ji',
+}, {
+
+    name: 'Guru Amar Das Ji',
+    image: guruAmarDasJiImage,
+    description: 'Guru Amar Das Ji was the third of the ten Sikh Gurus. He was the eldest son of Sri Tej Bhan Ji, a farmer and trader, and Mata Lakhmi Ji, of the village of Basarke in what is now called Amritsar district of Punjab.',
+    slug: 'guru-amar-das-ji',
+}, {
+    name: 'Guru Ram Das Ji',
+    image: guruRamDasJiImage,
+    description: 'Guru Ram Das Ji was the fourth of the ten Sikh Gurus. He was born on 24 September 1534 in a poor Hindu family based in Lahore, part of what is now Pakistan.',
+    slug: 'guru-ram-das-ji',
+}, {
+    name: 'Guru Arjan Dev Ji',
+    image: guruArjanDevJiImage,
+    description: 'Guru Arjan Dev Ji was the first of the two Gurus martyred in the Sikh faith and the fifth of the ten total Sikh Gurus. He compiled the first official edition of the Sikh scripture called the Adi Granth, which later expanded into the Guru Granth Sahib.',
+    slug: 'guru-arjan-dev-ji',
+}, {
+    name: 'Guru Har Gobind Ji',
+    image: guruHarGobindJiImage,
+    description: 'Guru Har Gobind Ji was the sixth of the ten Sikh Gurus. He was the son of Guru Arjan Dev Ji, the fifth Sikh Guru. He became Guru on 25 May 1606, following the footsteps of his father.',
+    slug: 'guru-har-gobind-ji',
+}, {
+    name: 'Guru Har Rai Ji',
+    image: guruHarRaiJiImage,
+    description: 'Guru Har Rai Ji was the seventh of the ten Sikh Gurus. He became the Sikh leader at age 14, on 8 March 1644, after the death of his grandfather and sixth Sikh leader Guru Hargobind Ji.',
+    slug: 'guru-har-rai-ji',
+}, {
+    name: 'Guru Har Krishan Ji',
+    image: guruHarKrishanJiImage,
+    description: 'Guru Har Krishan Ji was the eighth of the ten Sikh Gurus. At the age of 5, he became the youngest Guru in Sikhism on 7 October 1661, succeeding his father, Guru Har Rai Ji.',
+    slug: 'guru-har-krishan-ji',
+}, {
+    name: 'Guru Tegh Bahadur Ji',
+    image: guruTeghBahadurJiImage,
+    description: 'Guru Tegh Bahadur Ji was the ninth of the ten Sikh Gurus. He was publicly executed on the orders of the Mughal Emperor Aurangzeb in 1675 after he refused to convert to Islam.',
+    slug: 'guru-tegh-bahadur-ji',
+}, {
+    name: 'Guru Gobind Singh Ji',
+    image: guruGobindSinghJiImage,
+    description: 'Guru Gobind Singh Ji was the tenth Sikh Guru, a spiritual master, warrior, poet and philosopher. When his father, Guru Tegh Bahadur, was beheaded for refusing to convert to Islam, Guru Gobind Singh Ji was formally installed as the leader of the Sikhs at age nine, becoming the tenth Sikh Guru.',
+    slug: 'guru-gobind-singh-ji',
+}]
 ---
 
 <!doctype html>
@@ -34,17 +93,7 @@ const posts = (await getCollection('blog')).sort(
 				text-decoration: none;
 				transition: 0.2s ease;
 			}
-			ul li:first-child {
-				width: 100%;
-				margin-bottom: 1rem;
-				text-align: center;
-			}
-			ul li:first-child img {
-				width: 100%;
-			}
-			ul li:first-child .title {
-				font-size: 2.369rem;
-			}
+			
 			ul li img {
 				margin-bottom: 0.5rem;
 				border-radius: 12px;
@@ -91,14 +140,11 @@ const posts = (await getCollection('blog')).sort(
 			<section>
 				<ul>
 					{
-						posts.map((post) => (
+						sikhGurus.map((sikhGuruJi) => (
 							<li>
-								<a href={`/${post.slug}/`}>
-									<img width={720} height={360} src={post.data.heroImage} alt="" />
-									<h4 class="title">{post.data.title}</h4>
-									<p class="date">
-										<FormattedDate date={post.data.pubDate} />
-									</p>
+								<a href={`/${sikhGuruJi.slug}`}>
+									<Image width={720} height={360} src={sikhGuruJi.image} alt={sikhGuruJi.name} />
+									<h4 class="title">{sikhGuruJi.name}</h4>
 								</a>
 							</li>
 						))
